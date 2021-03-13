@@ -8,16 +8,15 @@
 /**
 *registering menu support
 */
-if ( ! function_exists( 'newstimes_register_nav_menu' ) ) {
- 
-    function newstimes_register_nav_menu(){
+
+function newstimes_register_nav_menu(){
         register_nav_menus( array(
             'header_menu' => __( 'Header Menu', 'news-times' ),
             'footer_menu'  => __( 'Footer Menu', 'news-times' ),
         ) );
     }
     add_action( 'after_setup_theme', 'newstimes_register_nav_menu', 0 );
-}
+
 
 
 
@@ -83,6 +82,8 @@ add_image_size('slider-item','1300','530',true);
 add_image_size('slider-item-featured','80','71',true);  
 
 //specific post category
-add_image_size('spc_post_cat','300','300',true);
+add_image_size('spc_post_cat','200','200',true);
 //single page image
-add_image_size('single-page-image','700','400',true);
+add_image_size('single-page-image','700','500',true);
+//thumbnail post image
+add_image_size('home-thumb-image','90','70',true);

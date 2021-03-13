@@ -98,26 +98,13 @@
                                 <div id="post-slider-1">
 
                                     <!-- post -->
-     <!--         <?php 
-                        //post query
+       
 
-            $args=array(
 
-                'post_type'         =>'post',
-                'post_status'       =>'publish',
-                'category_name'     =>'technology',
-                'posts_per_page'    =>10
-                                    );
-                $myQry= new wp_query($args);
-                if($myQry->have_posts()){
-                 while($myQry->have_posts()): $myQry->the_post();
-                  
-                                ?> 
-<?php endwhile;};?>
-<?php wp_reset_query();?>
- -->
-                    
-<?php while(have_posts()): the_post();?>
+<?php 
+if(have_posts()):
+ while(have_posts()): the_post();
+    ?>
 
                                 <div class="post style-1">
                                     <!-- post -->
@@ -126,7 +113,7 @@
                                         <!-- post img -->
                                         <div class="post-thumb"> 
                                  
-             <?php the_post_thumbnail('spc_post_cat',array('class'=>'spc-img-class'));?> 
+             <?php the_post_thumbnail('spc_post_cat',array('class'=>'spc-img-class'));?>
                                         
 
                                             <span class="post-badge">post</span>
@@ -151,8 +138,8 @@
                   <!-- post detail -->
                         </div>
                                   <!-- post -->
-<?php endwhile;?>
-
+<?php endwhile; endif;?>
+<?php wp_reset_query();?>
         
                                 </div>
                             </div>
@@ -539,53 +526,97 @@
                                     <!-- Post -->
                                     <div class="post style-2 white-bg light-shadow">
 
+                    <?php
+                    //main post image display here
+                    global $post;
+
+                 $args=array(
+                'post_type'         =>'post',
+                'post_status'       =>'publish',
+                'category_name'     =>'technology',
+                'posts_per_page'    =>1,
+                'order'             =>'DESC'
+                             );
+                $all_posts = get_posts($args);
+                               
+                 foreach($all_posts as $post): setup_postdata($post); 
+                                ?>
+
                                         <!-- Post Img -->
                                         <div class="post-thumb">
-                                            <img src="<?php echo get_template_directory_uri();?>/images/technology/img-01.jpg" alt="detail">
-                                            <span class="post-badge">technology</span>
-                                            <div class="thumb-hover">
-                                                <div class="position-center-center">
-                                                    <a href="<?php echo get_template_directory_uri();?>/#" class="fa fa-link"></a>
+        <?php the_post_thumbnail('spc_post_cat',array('class'=>'spc-img-class'));?>
+                <span class="post-badge"><?php the_category();?></span>
+                        <div class="thumb-hover">
+                        <div class="position-center-center">
+        <a href="<?php echo get_template_directory_uri();?>/#" class="fa fa-link"></a>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- Post Img -->
-
+                        <?php endforeach;?>
+                        <?php wp_reset_query();?>
                                         <!-- Post Detil -->
                                         <div class="post-content cat-listing">
-                                            <h4><a href="<?php echo get_template_directory_uri();?>/listing-page-5.html">Google is on a journey but we won't really know where it leads until fall</a></h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua.</p>
-                                            <ul class="post-wrap-list">
+                    <?php
+                    //main post
+                    global $post;
 
-                                                <!-- thumb small post -->
-                                                <li class="post-wrap big-post">
-                                                    <div class="post-thumb">
-                                                        <img src="<?php echo get_template_directory_uri();?>/images/technology/thumbs/img-01.jpg" alt="post">
-                                                    </div>
-                                                    <div class="post-content">
-                                                        <h4><a href="<?php echo get_template_directory_uri();?>/#">Google is on a journey but we won't really know</a></h4>
-                                                        <ul class="post-meta">
-                                                            <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                            <li><i class="fa fa-comments-o"></i>20</li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <!-- thumb small post -->
+                 $args=array(
+                'post_type'         =>'post',
+                'post_status'       =>'publish',
+                'category_name'     =>'technology',
+                'posts_per_page'    =>1,
+                'order'             =>'DESC'
+                             );
+                $all_posts = get_posts($args);
+                               
+                 foreach($all_posts as $post): setup_postdata($post); 
+                                ?>
+        <h4><a href="<?php the_permalink();?>"><?php the_title();?></a></h4>
+                    <p><?php the_excerpt();?></p>
 
+                            <?php endforeach;?>
+                        <?php wp_reset_query();?>
+
+
+
+                        <ul class="post-wrap-list">
+                            <?php
+                    //main post
+                    global $post;
+                        $i=0;
+                 $args=array(
+                'post_type'         =>'post',
+                'post_status'       =>'publish',
+                'category_name'     =>'technology',
+                'posts_per_page'    =>3,
+                'order'             =>'DESC'
+                             );
+                $all_posts = get_posts($args);
+                               
+                 foreach($all_posts as $post): setup_postdata($post);
+                 $i++;
+                  
+                                ?>
+
+             <?php if($i !=1):;?>                                   <!-- thumb small post -->
+     <li class="post-wrap big-post">
+            <div class="post-thumb">
+    <?php the_post_thumbnail('home-thumb-image',array('class'=>'home-thumb-image-class'));?>
+                </div>
+                <div class="post-content">
+         <h4><a href="<?php the_permalink();?>"><?php the_title();?></a></h4>
+                        <ul class="post-meta">
+                            <li><i class="fa fa-clock-o"></i><?php the_time('M d',Y);?></li>
+                                <li><i class="fa fa-comments-o"></i><?php comment_popup_link('no comments','1 comment','% comments');?></li>
+                            </ul>
+                         </div>
+                                </li>
+                                  <?php endif;?>              <!-- thumb small post -->
+                                <?php endforeach;?>
+                        <?php wp_reset_query();?>
                                                 <!-- thumb small post -->
-                                                <li class="post-wrap big-post">
-                                                    <div class="post-thumb">
-                                                        <img src="<?php echo get_template_directory_uri();?>/images/technology/thumbs/img-02.jpg" alt="post">
-                                                    </div>
-                                                    <div class="post-content">
-                                                        <h4><a href="<?php echo get_template_directory_uri();?>/#">Google is on a journey but we won't really know</a></h4>
-                                                        <ul class="post-meta">
-                                                            <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                            <li><i class="fa fa-comments-o"></i>20</li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
+                                               
                                                 <!-- thumb small post -->
 
                                             </ul>

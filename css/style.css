@@ -1098,3 +1098,6 @@ blockquote .current-post-type {    left: 30px;    top: 50%; margin-top:-22px;}
 #post-detail .post-info  > h3{margin-bottom:5px;}
 .slider-blog-post .post-info {    padding-top: 10px;}
 /** Over Rided Styles **/
+.post-badge{
+	color:#fff;
+}

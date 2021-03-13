@@ -114,8 +114,9 @@ while(have_posts()): the_post();?>
                                     <!-- blog pot thumb -->
                                     <div class="post-thumb"> 
    <?php the_post_thumbnail('single-page-image',array('class'=>'single-page-image-class')); ?>
-                                        <span class="post-badge">world news</span>
+                                        <span class="post-badge"><?php the_category(',');?></span>
                                     </div>
+
                                     <!-- blog pot thumb -->
 
                                     <!-- post detail -->
@@ -294,269 +295,63 @@ while(have_posts()): the_post();?>
                                     <div id="post-slider-2">
 
                                         <!-- post -->
-                                        <div class="post style-1">
 
-                                            <!-- thumbnail -->
-                                            <div class="post-thumb"> 
-                                                <img src="<?php echo get_stylesheet_uri(); ?>/images/post-1/img-01.jpg" alt="">
-                                                <span class="post-badge">post</span>
+ 					<?php
+                 //this is post id
+                 $post_tag_id=wp_get_post_tags('$post->ID');
 
-                                                <!-- post thumb hover -->
-                                                <div class="thumb-hover">
-                                                    <div class="position-center-center">
-                                                        <a href="<?php echo get_stylesheet_uri(); ?>/#" class="fa fa-link"></a>
-                                                    </div>
-                                                </div>
-                                                <!-- post thumb hover -->
+                 if($post_tag_id){
+                  $tag = $post_tag_id[0]->term->id;
+
+                   $arg =array( 
+                  'tag__in'			=>array($post_tag_id),
+                  'post__not_in' 	=>array($post->ID),
+                  'posts_per_page'	=>-1,
+                  'caller_get_posts'=>1
+                              );
+
+                   $My_query = new wp_Query($arg);
+                                 
+
+                       if($My_query->have_posts()){
+                      while($My_query->have_posts()): $My_query-> the_post();
+                                 
+                                   ?>                                       
+
+
+
+                            <div class="post style-1">
+
+                                      <!-- thumbnail -->
+                                <div class="post-thumb"> 
+      <?php the_post_thumbnail('single-page-image',array('class'=>'single-page-image-class'));?> 
+             <span class="post-badge"><?php the_category();?></span>
+
+                           <!-- post thumb hover -->
+                          <div class="thumb-hover">
+                 <div class="position-center-center">
+            <a href="<?php the_permalink(); ?>/#" class="fa fa-link"></a>
+                        </div>
+                       </div>
+               <!-- post thumb hover -->
                                                 
-                                            </div>
-                                            <!-- thumbnail -->
-                              <div class="post-content">
-                                 <ul class="post-meta">
-                                  <li><i class="fa fa-user"></i>jessica alex</li>
-                                                    <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                    <li><i class="fa fa-thumbs-o-up"></i>20</li>
-                                                </ul>
-                                                <h5 class="m-0"><a href="<?php echo get_stylesheet_uri(); ?>/#">Full Responsive amazing design And Pixel Perfect </a></h5>
-                                            </div>
-                                        </div>
-                                        <!-- post -->
+                       </div>
+              <!-- thumbnail -->
+                  <div class="post-content">
+                   <ul class="post-meta">
+           <li><i class="fa fa-user"></i><?php the_author();?></li>
+            <li><i class="fa fa-clock-o"></i><?php the_date();?></li>
+              <li><i class="fa fa-thumbs-o-up"></i>20</li>
+                                      </ul>
+       <h5 class="m-0"><a href="<?php the_permalink(); ?>"><?php the_title();?></a></h5>
+                               </div>
+                              </div>
+                   <?php   
+               		endwhile;}
+               		 }
 
-                                        <!-- post -->
-                                        <div class="post style-1">
-
-                                            <!-- thumbnail -->
-                                            <div class="post-thumb"> 
-                                                <img src="<?php echo get_stylesheet_uri(); ?>/images/post-1/img-02.jpg" alt="">
-                                                <span class="post-badge">post</span>
-
-                                                <!-- post thumb hover -->
-                                                <div class="thumb-hover">
-                                                    <div class="position-center-center">
-                                                        <a href="<?php echo get_stylesheet_uri(); ?>/#" class="fa fa-link"></a>
-                                                    </div>
-                                                </div>
-                                                <!-- post thumb hover -->
-
-                                            </div>
-                                            <!-- thumbnail -->
-
-                                            <div class="post-content">
-                                                <ul class="post-meta">
-                                                    <li><i class="fa fa-user"></i>jessica alex</li>
-                                                    <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                    <li><i class="fa fa-thumbs-o-up"></i>20</li>
-                                                </ul>
-                                                <h5 class="m-0"><a href="<?php echo get_stylesheet_uri(); ?>/#">Full Responsive amazing design And Pixel Perfect </a></h5>
-                                            </div>
-                                        </div>
-                                        <!-- post -->
-
-                                        <!-- post -->
-                                        <div class="post style-1">
-
-                                            <!-- thumbnail -->
-                                            <div class="post-thumb"> 
-                                                <img src="<?php echo get_stylesheet_uri(); ?>/images/post-1/img-03.jpg" alt="">
-                                                <span class="post-badge">post</span>
-
-                                                <!-- post thumb hover -->
-                                                <div class="thumb-hover">
-                                                    <div class="position-center-center">
-                                                        <a href="<?php echo get_stylesheet_uri(); ?>/#" class="fa fa-link"></a>
-                                                    </div>
-                                                </div>
-                                                <!-- post thumb hover -->
-
-                                            </div>
-                                            <!-- thumbnail -->
-
-                                            <div class="post-content">
-                                                <ul class="post-meta">
-                                                    <li><i class="fa fa-user"></i>jessica alex</li>
-                                                    <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                    <li><i class="fa fa-thumbs-o-up"></i>20</li>
-                                                </ul>
-                                                <h5 class="m-0"><a href="<?php echo get_stylesheet_uri(); ?>/#">Full Responsive amazing design And Pixel Perfect </a></h5>
-                                            </div>
-                                        </div>
-                                        <!-- post -->
-
-                                        <!-- post -->
-                                        <div class="post style-1">
-
-                                            <!-- thumbnail -->
-                                            <div class="post-thumb"> 
-                                                <img src="<?php echo get_stylesheet_uri(); ?>/images/post-1/img-01.jpg" alt="">
-                                                <span class="post-badge">post</span>
-
-                                                <!-- post thumb hover -->
-                                                <div class="thumb-hover">
-                                                    <div class="position-center-center">
-                                                        <a href="<?php echo get_stylesheet_uri(); ?>/#" class="fa fa-link"></a>
-                                                    </div>
-                                                </div>
-                                                <!-- post thumb hover -->
-                                                
-                                            </div>
-                                            <!-- thumbnail -->
-                                            <div class="post-content">
-                                                <ul class="post-meta">
-                                                    <li><i class="fa fa-user"></i>jessica alex</li>
-                                                    <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                    <li><i class="fa fa-thumbs-o-up"></i>20</li>
-                                                </ul>
-                                                <h5 class="m-0"><a href="<?php echo get_stylesheet_uri(); ?>/#">Full Responsive amazing design And Pixel Perfect </a></h5>
-                                            </div>
-                                        </div>
-                                        <!-- post -->
-
-                                        <!-- post -->
-                                        <div class="post style-1">
-
-                                            <!-- thumbnail -->
-                                            <div class="post-thumb"> 
-                                                <img src="<?php echo get_stylesheet_uri(); ?>/images/post-1/img-02.jpg" alt="">
-                                                <span class="post-badge">post</span>
-
-                                                <!-- post thumb hover -->
-                                                <div class="thumb-hover">
-                                                    <div class="position-center-center">
-                                                        <a href="<?php echo get_stylesheet_uri(); ?>/#" class="fa fa-link"></a>
-                                                    </div>
-                                                </div>
-                                                <!-- post thumb hover -->
-
-                                            </div>
-                                            <!-- thumbnail -->
-
-                                            <div class="post-content">
-                                                <ul class="post-meta">
-                                                    <li><i class="fa fa-user"></i>jessica alex</li>
-                                                    <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                    <li><i class="fa fa-thumbs-o-up"></i>20</li>
-                                                </ul>
-                                                <h5 class="m-0"><a href="<?php echo get_stylesheet_uri(); ?>/#">Full Responsive amazing design And Pixel Perfect </a></h5>
-                                            </div>
-                                        </div>
-                                        <!-- post -->
-
-                                        <!-- post -->
-                                        <div class="post style-1">
-
-                                            <!-- thumbnail -->
-                                            <div class="post-thumb"> 
-                                                <img src="<?php echo get_stylesheet_uri(); ?>/images/post-1/img-03.jpg" alt="">
-                                                <span class="post-badge">post</span>
-
-                                                <!-- post thumb hover -->
-                                                <div class="thumb-hover">
-                                                    <div class="position-center-center">
-                                                        <a href="<?php echo get_stylesheet_uri(); ?>/#" class="fa fa-link"></a>
-                                                    </div>
-                                                </div>
-                                                <!-- post thumb hover -->
-
-                                            </div>
-                                            <!-- thumbnail -->
-
-                                            <div class="post-content">
-                                                <ul class="post-meta">
-                                                    <li><i class="fa fa-user"></i>jessica alex</li>
-                                                    <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                    <li><i class="fa fa-thumbs-o-up"></i>20</li>
-                                                </ul>
-                                                <h5 class="m-0"><a href="<?php echo get_stylesheet_uri(); ?>/#">Full Responsive amazing design And Pixel Perfect </a></h5>
-                                            </div>
-                                        </div>
-                                        <!-- post -->
-                                        <!-- post -->
-                                        <div class="post style-1">
-
-                                            <!-- thumbnail -->
-                                            <div class="post-thumb"> 
-                                                <img src="<?php echo get_stylesheet_uri(); ?>/images/post-1/img-01.jpg" alt="">
-                                                <span class="post-badge">post</span>
-
-                                                <!-- post thumb hover -->
-                                                <div class="thumb-hover">
-                                                    <div class="position-center-center">
-                                                        <a href="<?php echo get_stylesheet_uri(); ?>/#" class="fa fa-link"></a>
-                                                    </div>
-                                                </div>
-                                                <!-- post thumb hover -->
-                                                
-                                            </div>
-                                            <!-- thumbnail -->
-                                            <div class="post-content">
-                                                <ul class="post-meta">
-                                                    <li><i class="fa fa-user"></i>jessica alex</li>
-                                                    <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                    <li><i class="fa fa-thumbs-o-up"></i>20</li>
-                                                </ul>
-                                                <h5 class="m-0"><a href="<?php echo get_stylesheet_uri(); ?>/#">Full Responsive amazing design And Pixel Perfect </a></h5>
-                                            </div>
-                                        </div>
-                                        <!-- post -->
-
-                                        <!-- post -->
-                                        <div class="post style-1">
-
-                                            <!-- thumbnail -->
-                                            <div class="post-thumb"> 
-                                                <img src="<?php echo get_stylesheet_uri(); ?>/images/post-1/img-02.jpg" alt="">
-                                                <span class="post-badge">post</span>
-
-                                                <!-- post thumb hover -->
-                                                <div class="thumb-hover">
-                                                    <div class="position-center-center">
-                                                        <a href="<?php echo get_stylesheet_uri(); ?>/#" class="fa fa-link"></a>
-                                                    </div>
-                                                </div>
-                                                <!-- post thumb hover -->
-
-                                            </div>
-                                            <!-- thumbnail -->
-
-                                            <div class="post-content">
-                                                <ul class="post-meta">
-                                                    <li><i class="fa fa-user"></i>jessica alex</li>
-                                                    <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                    <li><i class="fa fa-thumbs-o-up"></i>20</li>
-                                                </ul>
-                                                <h5 class="m-0"><a href="<?php echo get_stylesheet_uri(); ?>/#">Full Responsive amazing design And Pixel Perfect </a></h5>
-                                            </div>
-                                        </div>
-                                        <!-- post -->
-
-                                        <!-- post -->
-                                        <div class="post style-1">
-
-                                            <!-- thumbnail -->
-                                            <div class="post-thumb"> 
-                                                <img src="<?php echo get_stylesheet_uri(); ?>/images/post-1/img-03.jpg" alt="">
-                                                <span class="post-badge">post</span>
-
-                                                <!-- post thumb hover -->
-                                                <div class="thumb-hover">
-                                                    <div class="position-center-center">
-                                                        <a href="<?php echo get_stylesheet_uri(); ?>/#" class="fa fa-link"></a>
-                                                    </div>
-                                                </div>
-                                                <!-- post thumb hover -->
-
-                                            </div>
-                                            <!-- thumbnail -->
-
-                                            <div class="post-content">
-                                                <ul class="post-meta">
-                                                    <li><i class="fa fa-user"></i>jessica alex</li>
-                                                    <li><i class="fa fa-clock-o"></i>25 dec, 2016</li>
-                                                    <li><i class="fa fa-thumbs-o-up"></i>20</li>
-                                                </ul>
-                                                <h5 class="m-0"><a href="<?php echo get_stylesheet_uri(); ?>/#">Full Responsive amazing design And Pixel Perfect </a></h5>
-                                            </div>
-                                        </div>
+                   ?>
+                            
                                         <!-- post -->
 
                                     </div>

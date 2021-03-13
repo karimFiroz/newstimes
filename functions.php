@@ -84,3 +84,5 @@ add_image_size('slider-item-featured','80','71',true);
 
 //specific post category
 add_image_size('spc_post_cat','300','300',true);
+//single page image
+add_image_size('single-page-image','700','400',true);
